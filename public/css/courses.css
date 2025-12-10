@@ -1,0 +1,15 @@
+.courses-header {
+  margin-bottom: 48px;
+}
+
+.courses-table th,
+.courses-table td {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.course-thumbnail {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+}

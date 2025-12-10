@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --font-primary: "Inter", sans-serif;
+  --color-primary: #0f766e;
+  --color-border: #0f766e33;
+  --color-background: #96f2d7;
+  --color-font: #495057;
+  --color-font-dark: #343a40;
+}
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: var(--color-font-dark);
+  display: inline-block;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+section {
+  margin-bottom: 96px;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* TABLE STYLES  */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table th,
+table td {
+  padding: 12px 16px;
+  text-align: left;
+  width: auto;
+}
+
+/* BUTTON STYLES */
+.button,
+.button:visited,
+.button:active,
+.button:focus,
+button {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.button-blue,
+.button:visited,
+.button:active,
+.button:focus {
+  background-color: #228be6;
+}
+
+.button-red,
+.button:visited,
+.button:active,
+.button:focus {
+  background-color: #f03e3e;
+}
+
+.button-green,
+.button:visited,
+.button:active,
+.button:focus {
+  background-color: #37b24d;
+}
+
+.button-orange,
+.button:visited,
+.button:active,
+.button:focus {
+  background-color: #f76707;
+}
+.button-orangered,
+.button:visited,
+.button:active,
+.button:focus {
+  background-color: #ff4500;
+}
+.button-yellow,
+.button:visited,
+.button:active,
+.button:focus {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.button-primary,
+.button-primary:visited,
+.button-primary:active,
+.button-primary:focus {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+/* ACTIONS  */
+.actions a {
+  margin-bottom: 8px;
+}
+
+/* FORM STYLES */
+
+input[type="submit"] {
+  padding: 12px 16px;
+  font-size: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+/* ////////////////////////////////////////// */
+/* FLEX BOX UTILITIES */
+.flex {
+  display: flex;
+}
+
+.flex-jc-sb {
+  justify-content: space-between;
+}
+
+.flex-jc-c {
+  justify-content: center;
+}
+
+.flex-ai-c {
+  align-items: center;
+}

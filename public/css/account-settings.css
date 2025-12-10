@@ -1,0 +1,22 @@
+.account-settings h2 {
+  margin-bottom: 24px;
+}
+.profile {
+  margin-bottom: 48px;
+}
+
+.profile h3,
+.password h3 {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.form-profile,
+.form-password {
+  max-width: 450px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
