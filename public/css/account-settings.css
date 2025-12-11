@@ -1,17 +1,40 @@
-.account-settings h2 {
-  margin-bottom: 24px;
-}
 .profile {
-  margin-bottom: 48px;
+  margin-bottom: 96px;
 }
-
+.password {
+  margin-bottom: 96px;
+}
 .profile h3,
 .password h3 {
-  margin-bottom: 16px;
+  margin-bottom: 48px;
   text-align: center;
 }
+.profile-wrapper {
+  display: flex;
+  gap: 48px;
+}
 
-.form-profile,
+.profile-image {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+}
+
+.profile-info {
+  width: 100%;
+}
+
+.form-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
 .form-password {
   max-width: 450px;
   width: 100%;
@@ -19,4 +42,134 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.button-edit,
+.button-edit:visited,
+.button-edit:active,
+.button-edit:focus {
+  display: flex;
+  gap: 8px;
+  justify-self: end;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid var(--color-border);
+  margin-bottom: 24px;
+}
+
+.input-disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* MODAL STYLES */
+
+/* --- Overlay --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+
+.hidden {
+  display: none;
+}
+
+/* --- Modal Box --- */
+.modal-box {
+  background: #111827; /* dark slate */
+  width: 420px;
+  padding: 24px;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 35px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.modal-close:hover {
+  color: white;
+}
+
+/* Label */
+.modal-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+/* Input */
+.modal-input {
+  width: 100%;
+  padding: 10px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.modal-input:hover {
+  border-color: #4b5563;
+}
+
+/* Submit Button */
+.modal-submit {
+  width: 100%;
+  padding: 10px;
+  background: #059669; /* green */
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.modal-submit:hover {
+  background: #047857;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

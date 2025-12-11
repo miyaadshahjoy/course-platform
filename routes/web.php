@@ -12,6 +12,10 @@ $routes = [
         '/admin/users' => ['App\Controllers\AdminDashboardController', 'users'], # [GET] /admin/users
         '/admin/account-settings' => ['App\Controllers\AdminDashboardController', 'settings'], # [GET] /admin/account-settings
 
+        '/users' => ['App\Controllers\UserController', 'index'], # [GET] /users
+        '/users/dashboard' => ['App\Controllers\UserController', 'dashboard'], # [GET] /users/dashboard
+
+
     ],
     
     'POST' => [

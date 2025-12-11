@@ -37,8 +37,9 @@ h6 {
   line-height: 1.1;
 }
 
-a,
+a:link,
 a:visited,
+a:focus,
 a:active {
   text-decoration: none;
   color: var(--color-font-dark);
@@ -77,63 +78,74 @@ table td {
 .button:active,
 .button:focus,
 button {
-  display: inline-block;
+  /* display: inline-block; */
   background-color: var(--color-primary);
   color: #ffffff;
   border: none;
   padding: 8px 12px;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
 }
 
 .button-blue,
-.button:visited,
-.button:active,
-.button:focus {
+.button-blue:visited,
+.button-blue:active,
+.button-blue:focus {
   background-color: #228be6;
 }
 
 .button-red,
-.button:visited,
-.button:active,
-.button:focus {
+.button-red:visited,
+.button-red:active,
+.button-red:focus {
   background-color: #f03e3e;
 }
 
 .button-green,
-.button:visited,
-.button:active,
-.button:focus {
+.button-green:visited,
+.button-green:active,
+.button-green:focus {
   background-color: #37b24d;
 }
 
 .button-orange,
-.button:visited,
-.button:active,
-.button:focus {
+.button-orange:visited,
+.button-orange:active,
+.button-orange:focus {
   background-color: #f76707;
 }
 .button-orangered,
-.button:visited,
-.button:active,
-.button:focus {
+.button-orangered:visited,
+.button-orangered:active,
+.button-orangered:focus {
   background-color: #ff4500;
 }
 .button-yellow,
-.button:visited,
-.button:active,
-.button:focus {
+.button-yellow:visited,
+.button-yellow:active,
+.button-yellow:focus {
   background-color: #ffcc00;
   color: #000;
 }
 
-.button-primary,
-.button-primary:visited,
-.button-primary:active,
-.button-primary:focus {
+.button-submit,
+.button-submit:visited,
+.button-submit:active,
+.button-submit:focus {
   background-color: var(--color-primary);
   color: #fff;
+  padding: 12px 16px;
+}
+
+.button-cancel,
+.button-cancel:visited,
+.button-cancel:active,
+.button-cancel:focus {
+  background-color: #fff;
+  color: var(--color-primary);
+  padding: 12px 16px;
+  border: 1px solid var(--color-primary);
 }
 
 /* ACTIONS  */
@@ -142,11 +154,11 @@ button {
 }
 
 /* FORM STYLES */
-
+/* 
 input[type="submit"] {
   padding: 12px 16px;
   font-size: 1rem;
-}
+} */
 
 .form-group {
   display: flex;
@@ -169,4 +181,16 @@ input[type="submit"] {
 
 .flex-ai-c {
   align-items: center;
+}
+.flex-js-e {
+  justify-self: end;
+}
+
+.flex-gap {
+  gap: 24px;
+}
+
+/* Display none */
+.hide {
+  display: none;
 }
