@@ -7,6 +7,9 @@
     <title><?= $user['FULLNAME']?></title>
   </head>
   <body>
+
+    <!-- Header -->
+    <?php require_once __DIR__ . '/../partials/header.php'; ?>
     <div class="container">
       <div class="profile">
         <h3>Profile Information</h3>

@@ -92,7 +92,9 @@ class AuthController extends Controller {
         
         # Set session variables
         $_SESSION['user_id'] = $user['ID'];
+        $_SESSION['user_fullname'] = $user['FULLNAME'];
         $_SESSION['user_email'] = $user['EMAIL'];
+        $_SESSION['user_image'] = $user['IMAGE'];
         $_SESSION['user_role'] = $user['ROLE'];
 
         if ($user['ROLE'] === 'admin'):
@@ -109,7 +111,9 @@ class AuthController extends Controller {
     public function logout(){
 
         unset($_SESSION['user_id']);
+        unset($_SESSION['user_fullname']);
         unset($_SESSION['user_email']);
+        unset($_SESSION['user_image']);
         unset($_SESSION['user_role']);
 
         session_destroy();

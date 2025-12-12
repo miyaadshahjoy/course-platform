@@ -9,6 +9,8 @@
   </head>
 
   <body>
+    <?php require_once __DIR__ . '/../partials/header.php'; ?>
+
     <div class="dashboard">
       <!-- Sidebar -->
       <?php require __DIR__ . '/../partials/user-sidebar.php'; ?>

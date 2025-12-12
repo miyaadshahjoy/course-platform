@@ -1,0 +1,59 @@
+<header class="header">
+  <div class="container">
+    <nav class="header-nav flex flex-jc-sb flex-ai-c">
+      <div class="header-logo">
+        <a href="/"> LOGO </a>
+      </div>
+      <ul class="header-links">
+
+        
+        <!-- profile: Show only when signed in -->
+        <?php if (isset($_SESSION['user_id'])): ?>
+          <li>
+            <a href="/users">Profile</a>
+          </li>
+
+          <!-- Courses: Show only when signed in -->
+          <li>
+            <a href="/users/dashboard">Courses</a>
+          </li>
+          <!-- logout: Show only when signed in -->
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+
+          <!-- account settings: Show only when signed in -->
+          <li>
+            <a class="user-profile" href="/users">
+              <!-- Avatar -->
+              <?php if($_SESSION['user_image']): ?> 
+                <img
+                  class="avatar"
+                  src="/uploads/users/<?= $_SESSION['user_image'] ?>"
+                  alt="avatar"
+                />
+              <?php else: ?>
+                <img
+                  class="avatar"
+                  src="/uploads/users/user.svg"
+                  alt="avatar"
+                />
+              <?php endif; ?>
+              <span><?= $_SESSION['user_fullname'] ?></span>
+            </a>
+          </li>
+        <?php endif; ?>
+        <?php if (!isset($_SESSION['user_id'])): ?>
+        <!-- signin: Show only when NOT signed in -->
+          <li>
+            <a href="/signin">Sign in</a>
+          </li>
+        <?php endif; ?>
+
+
+
+        
+      </ul>
+    </nav>
+  </div>
+</header>

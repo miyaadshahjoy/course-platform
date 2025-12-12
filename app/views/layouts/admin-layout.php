@@ -17,6 +17,7 @@
 
       <!-- Main content -->
       <main class="main-content">
+        <?php require __DIR__ . '/../partials/admin-navbar.php'; ?>
         <?= $content ?>
       </main>
     </div>

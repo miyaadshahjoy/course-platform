@@ -43,7 +43,7 @@ a:focus,
 a:active {
   text-decoration: none;
   color: var(--color-font-dark);
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 img {
@@ -55,7 +55,7 @@ section {
   margin-bottom: 96px;
 }
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 24px;
 }
