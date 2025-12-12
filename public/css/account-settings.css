@@ -23,6 +23,12 @@
   width: 100%;
   height: auto;
 }
+.profile-image img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
 .profile-info {
   width: 100%;

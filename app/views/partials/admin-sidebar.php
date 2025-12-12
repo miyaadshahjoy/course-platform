@@ -8,5 +8,6 @@
     <a href="/admin/users">👥 Users</a>
     <a href="/admin/reviews">⭐ Reviews</a>
     <a href="/admin/account-settings">⚙ Account Settings</a>
+    <a href="/logout">🚪 Logout</a>
   </nav>
 </aside>

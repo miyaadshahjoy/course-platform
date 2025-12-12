@@ -2,19 +2,31 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
-use App\Models\CourseModel; // And other models as needed (e.g., UserModel)
+use App\Models\CourseModel; 
 use App\Models\UserModel;
+use App\Middlewares\LoggerMiddleware;
+use App\Middlewares\AuthMiddleware;
+use App\Middlewares\AdminMiddleware;
 
 
 
 class AdminDashboardController extends Controller {
     private $courseObject;
     private $userObject;
+    protected $request;
+    protected $middlewares = [
+        'index' => [LoggerMiddleware::class, AuthMiddleware::class, AdminMiddleware::class],
+    ];
 
-    public function __construct() {
+    public function __construct($request) {
         $this->courseObject = new CourseModel();
         $this->userObject = new UserModel();
+        $this->request = $request;
     }
+    public function getMiddlewares($method) {
+        return $this->middlewares[$method] ?? [];
+    }
+
 
     public function index() {
         

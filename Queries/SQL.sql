@@ -26,7 +26,9 @@ CREATE TABLE courses(
     updated_at TIMESTAMP
 );
 
-DROP TABLE courses;
+ALTER TABLE users 
+ADD image VARCHAR2(255);
+
 
 SELECT * FROM users;
 SELECT * FROM courses;

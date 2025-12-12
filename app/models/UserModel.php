@@ -32,7 +32,24 @@ class UserModel extends Model {
         
     }
 
-    # TODO: Implement findByEmail method
+    public function findById($id){
+
+        if(empty($id)){
+            return null;
+        }
+        $sql = "SELECT * FROM " . $this->table . " WHERE id = :id";
+        $params = [
+            ':id' => $id
+        ];
+        $statement = DB::query($sql, $params);
+        $result = oci_execute($statement);
+
+        if(!$result):
+            return null;
+        endif;
+
+        return DB::fetch($statement);
+    }
     public function findByEmail($email){
 
         if(empty($email)){
@@ -88,6 +105,33 @@ class UserModel extends Model {
         return DB::fetchAll($statement);
           
     }    
+
+    public function updateUser($id, $data){
+
+        $sql = "UPDATE " . $this->table . "
+                SET fullname = :fullname,
+                username = :username,
+                email = :email, 
+                password = :password, 
+                role = :role ,
+                image = :image
+                WHERE id = :id";
+
+        $params = [
+            ':fullname' => $data['fullname'],
+            ':username' => $data['username'],
+            ':email' => $data['email'],
+            ':password' => $data['password'],
+            ':role' => $data['role'],
+            ':image' => $data['image'],
+            ':id' => $id
+        ];
+        # returns the statement
+        $statement = DB::query($sql, $params);
+        $result = oci_execute($statement);
+        return $result;
+
+    }
 }
 
 

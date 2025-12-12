@@ -93,8 +93,30 @@ class AuthController extends Controller {
         # Set session variables
         $_SESSION['user_id'] = $user['ID'];
         $_SESSION['user_email'] = $user['EMAIL'];
+        $_SESSION['user_role'] = $user['ROLE'];
 
-        echo "✅ Signin successful! Welcome, " . htmlspecialchars($user['FULLNAME']) . ".";
+        if ($user['ROLE'] === 'admin'):
+            header("Location: /admin");
+            exit;
+        endif;
+
+        header("Location: /users");
+        exit;
+
+    }
+
+
+    public function logout(){
+
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        unset($_SESSION['user_role']);
+
+        session_destroy();
+
+        echo "✅ Signout successful!";
+        header("Location: /signin");
+    
     }
 
 }

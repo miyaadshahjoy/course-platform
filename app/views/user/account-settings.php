@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../css/style.css" />
-    <title></title>
+    <title><?= $user['FULLNAME']?></title>
   </head>
   <body>
     <div class="container">
@@ -12,7 +12,11 @@
         <h3>Profile Information</h3>
         <div class="profile-wrapper">
           <div class="profile-image">
-            <img src="/uploads/users/user.svg" />
+            <?php if($user['IMAGE']): ?>
+              <img src="/uploads/users/<?= $user['IMAGE'] ?>" />
+            <?php else: ?>
+              <img src="/uploads/users/user.svg" />
+            <?php endif; ?>
             <button class="button button-edit edit-picture">
               <svg
                 viewBox="0 0 24 24"
@@ -80,14 +84,14 @@
                 </g>
               </svg>
             </button>
-            <form action="" class="form-profile">
+            <form action="/user/update-profile" method="POST" class="form-profile">
               <div class="form-wrapper">
                 <div class="form-group">
                   <label>Full Name</label>
                   <input
                     type="text"
                     name="fullname"
-                    value="Zayd Hasnain"
+                    value="<?= $user['FULLNAME'] ?>"
                     required
                     disabled
                   />
@@ -97,7 +101,7 @@
                   <input
                     type="text"
                     name="username"
-                    value="zaydhasnain"
+                    value="<?= $user['USERNAME'] ?>"
                     required
                     disabled
                   />
@@ -108,7 +112,7 @@
                   <input
                     type="email"
                     name="email"
-                    value="zayd.hasnain@example.com"
+                    value="<?= $user['EMAIL'] ?>"
                     required
                     disabled
                   />
@@ -132,7 +136,7 @@
         <h3>Update Password</h3>
 
         <form
-          action="/admin/account/update-password"
+          action="/user/update-password"
           method="POST"
           class="form-password"
         >
@@ -167,10 +171,10 @@
               <button class="modal-close">&times;</button>
           </div>
 
-          <form id="" enctype="multipart/form-data">
+          <form id="" action="/user/update-picture" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label class="modal-label">Picture</label>
-              <input type="file" name="picture" class="modal-input" />
+              <input type="file" name="image" class="modal-input" />
 
               <input type="submit" class="button button-submit" value="Submit">
             </div>

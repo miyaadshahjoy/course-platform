@@ -1,14 +1,17 @@
 <?php
 namespace App\Middlewares;
+use App\Middlewares\MiddlewareInterface;
 
-class AuthMiddleware 
+class AuthMiddleware implements MiddlewareInterface 
 {
-    public static function handle() 
-    {
+    public function handle($request, $next) {
         if (!isset($_SESSION['user_id'])) :
-            header("Location: /signin");
+            echo "You must be signed in to access this page.";
+            // header("Location: /signin");
             exit;
         endif;
+
+        return $next($request);
     }
 }
 
