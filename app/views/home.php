@@ -11,7 +11,6 @@
     <?php require_once __DIR__ . '/partials/header.php'; ?>
     <div class="container">
       <h1>Welcome to the Course Platform</h1>
-
     </div>
   </body>
 </html>

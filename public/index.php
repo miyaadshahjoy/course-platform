@@ -1,7 +1,31 @@
 <?php
+use App\Controllers\ErrorController;
 
 # Start the session
 session_start();
+
+
+set_exception_handler(function ($e) {
+    error_log($e);
+    (new ErrorController)->show(500);
+});
+
+set_error_handler(function ($severity, $message, $file, $line) {
+
+    # 
+    if (!(error_reporting() & $severity)) return;
+    
+
+    #
+    error_log("$message in $file on line $line");
+
+    # Severe errors
+    if (in_array($severity, [E_ERROR, E_USER_ERROR])) {
+        (new ErrorController)->show(500);
+    }
+});
+
+
 
 # Autoload classes using Composer
 require_once __DIR__ . '/../vendor/autoload.php';

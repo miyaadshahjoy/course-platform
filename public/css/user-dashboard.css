@@ -1,11 +1,12 @@
+.courses {
+  padding-top: 24px;
+}
 .course-card {
   width: 350px;
-  background: #ffffff;
+  background: #fff;
   border-radius: 15px;
-  border: 1px solid #e3e3e3;
   overflow: hidden;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-  font-family: Arial, sans-serif;
 }
 
 .course-image {
@@ -15,20 +16,17 @@
 }
 
 .course-body {
-  padding: 18px;
+  padding: 16px;
 }
 
 .course-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #333;
+  margin-bottom: 16px;
 }
 
 .course-rating {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .star {
@@ -42,20 +40,18 @@
 }
 
 .rating-text {
-  font-size: 14px;
-  color: #666;
   margin-left: 6px;
 }
 
 .course-progress {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .progress-labels {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #666;
+  /* color: #666; */
   margin-bottom: 6px;
 }
 
@@ -69,22 +65,18 @@
 
 .progress-fill {
   height: 100%;
-  background: #6c5ce7; /* Purple */
+  background: var(--color-primary); /* Purple */
   border-radius: 5px;
 }
 
 .course-btn {
   width: 100%;
   padding: 10px;
-  background: #6c5ce7;
+  background: var(--color-primary);
   color: #fff;
   border: none;
   border-radius: 10px;
   font-size: 15px;
   cursor: pointer;
   transition: 0.3s;
-}
-
-.course-btn:hover {
-  background: #5847d8;
 }

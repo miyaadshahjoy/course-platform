@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/toasts.php'; ?>
 <header class="header">
   <div class="container">
     <nav class="header-nav flex flex-jc-sb flex-ai-c">
@@ -9,14 +10,22 @@
         
         <!-- profile: Show only when signed in -->
         <?php if (isset($_SESSION['user_id'])): ?>
-          <li>
-            <a href="/users">Profile</a>
-          </li>
+          <?php if($_SESSION['user_role'] == 'user'): ?>
+            <li>
+              <a href="/users">Profile</a>
+            </li>
+            
+            <!-- Courses: Show only when signed in -->
+            <li>
+              <a href="/users/dashboard">Courses</a>
+            </li>
+          <?php endif; ?>
+          <?php if($_SESSION['user_role'] != 'user'): ?>
+            <li>
+              <a href="/admin">Dashboard</a>
+            </li>
+          <?php endif; ?>
 
-          <!-- Courses: Show only when signed in -->
-          <li>
-            <a href="/users/dashboard">Courses</a>
-          </li>
           <!-- logout: Show only when signed in -->
           <li>
             <a href="/logout">Logout</a>
@@ -24,7 +33,7 @@
 
           <!-- account settings: Show only when signed in -->
           <li>
-            <a class="user-profile" href="/users">
+            <a class="user-profile" href="<?= $_SESSION['user_role'] == 'user' ? '/users' : 'admin/account-settings' ?>">
               <!-- Avatar -->
               <?php if($_SESSION['user_image']): ?> 
                 <img

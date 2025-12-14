@@ -7,7 +7,7 @@
     action="/admin/courses/store"
     method="POST"
     enctype="multipart/form-data"
-    class="create-form"
+    class="form form-create"
   >
     <div class="form-group">
       <label>Course Title</label>
@@ -81,7 +81,7 @@
       />
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>Status</label>
       <select
         name="status"
@@ -90,12 +90,12 @@
         <option value="draft">Draft</option>
         <option value="published">Publish</option>
       </select>
-    </div>
+    </div> --->
 
     <input
       type="submit"
       value="Create Course"
-      class="button button-primary"
+      class="button-submit"
     />
   </form>
 </section>

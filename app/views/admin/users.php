@@ -6,10 +6,10 @@
       <thead >
         <tr>
           <th>Full Name</th>
-          <th>Username</th>
           <th>Email</th>
           <th>Role</th>
           <th>Joined</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -19,7 +19,6 @@
         <?php foreach ($users as $user): ?>
         <tr>
           <td><?= htmlspecialchars($user['FULLNAME']) ?></td>
-          <td><?= htmlspecialchars($user['USERNAME']) ?></td>
           <td><?= htmlspecialchars($user['EMAIL']) ?></td>
 
           <td>
@@ -32,6 +31,9 @@
             <?= DateTime::createFromFormat('d-M-y h.i.s.u A', $user['CREATED_AT'])->format('F d, Y') ?>
           </td>
 
+          <td><?= htmlspecialchars($user['STATUS']) ?></td>
+
+
           <td class="">
             <a
               href="/admin/users/view/<?= $user['ID'] ?>"
@@ -39,12 +41,14 @@
               >View</a
             >
 
-            <a
-              href="/admin/users/delete/<?= $user['ID'] ?>"
-              onclick="return confirm('Permanently delete this user?')"
-              class="button button-red"
-              >Delete</a
-            >
+            <?php if($user['STATUS'] === 'active'): ?>
+              <a
+                href="/admin/users/delete/<?= $user['ID'] ?>"
+                onclick="return confirm('Permanently delete this user?')"
+                class="button button-red"
+                >Delete</a
+              >
+            <?php endif; ?>
           </td>
         </tr>
         <?php endforeach; ?>

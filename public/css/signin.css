@@ -1,0 +1,22 @@
+.signin {
+  padding-top: 96px;
+  /* padding-bottom: 144px; */
+}
+
+.signin-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+}
+
+.signin-wrapper h2 {
+  margin-bottom: 48px;
+  text-align: center;
+}
+.form-signin {
+  max-width: 450px;
+  width: 100%;
+  margin-bottom: 48px;
+}

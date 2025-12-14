@@ -11,7 +11,7 @@ class CourseModel extends Model {
     }
 
     public function createCourse($data) {
-        $sql = "INSERT INTO " . $this->table . " (course_title, course_description, thumbnail, category, price, slug, difficulty_level, duration, status) VALUES (:course_title, :course_description, :thumbnail, :category, :price, :slug, :difficulty_level, :duration, :status)";
+        $sql = "INSERT INTO " . $this->table . " (course_title, course_description, thumbnail, category, price, slug, difficulty_level, duration) VALUES (:course_title, :course_description, :thumbnail, :category, :price, :slug, :difficulty_level, :duration)";
 
         $params = [
             ':course_title' => $data['course_title'],
@@ -22,7 +22,6 @@ class CourseModel extends Model {
             ':slug' => $data['slug'],
             ':difficulty_level' => $data['difficulty_level'],
             ':duration' => $data['duration'],
-            ':status' => isset($data['status']) ? $data['status'] : 'draft'
         ];
 
         # returns the statement
@@ -32,7 +31,7 @@ class CourseModel extends Model {
     }
 
     public function getAllCourses(){
-        $sql = "SELECT * FROM " . $this->table;
+        $sql = "SELECT * FROM " . $this->table . " WHERE status != 'archived'";
         $statement = DB::query($sql);
         $result = oci_execute($statement);
 
@@ -49,7 +48,7 @@ class CourseModel extends Model {
             return null;
         endif;
 
-        $sql = "SELECT * FORM " . $this->table . " WHERE id = :id";
+        $sql = "SELECT * FROM " . $this->table . " WHERE id = :id";
         $params = [':id' => $id];
         $statement = DB::query($sql, $params);
         $result = oci_execute($statement);
@@ -74,8 +73,7 @@ class CourseModel extends Model {
                price = :price,
                slug = :slug,
                difficulty_level = :difficulty_level,
-               duration = :duration,
-               status = :status
+               duration = :duration
                WHERE id = :id";
         $params = [
             ':course_title' => $data['course_title'] ,
@@ -86,7 +84,6 @@ class CourseModel extends Model {
             ':slug' => $data['slug'] ,
             ':difficulty_level' => $data['difficulty_level'] ,
             ':duration' => $data['duration'] ,
-            ':status' => $data['status'] ,
             ':id' => $id
         ];
 
@@ -107,9 +104,46 @@ class CourseModel extends Model {
         return $result;
     }
 
+    # Publish course
+    public function publish($id){
+        if(!$id) return false;
+
+        $sql = "UPDATE " . $this->table . 
+        " SET status = 'published' WHERE id = :id";
+        $params = [':id' => $id];
+        
+        $statement = DB::query($sql, $params);
+        $result = oci_execute($statement);
+        return $result;
+    }
+    # Draft course
+    public function draft($id){
+        if(!$id) return false;
+
+        $sql = "UPDATE " . $this->table . 
+        " SET status = 'draft' WHERE id = :id";
+        $params = [':id' => $id];
+        
+        $statement = DB::query($sql, $params);
+        $result = oci_execute($statement);
+        return $result;
+    }
+    # Archive course
+    public function archive($id){
+        if(!$id) return false;
+
+        $sql = "UPDATE " . $this->table . 
+        " SET status = 'archived' WHERE id = :id";
+        $params = [':id' => $id];
+        
+        $statement = DB::query($sql, $params);
+        $result = oci_execute($statement);
+        return $result;
+    }
+
     # Get total number of courses
     public function getTotalCourses() {
-        $sql = "SELECT COUNT(*) AS total FROM " . $this->table;
+        $sql = "SELECT COUNT(*) AS total FROM " . $this->table . " WHERE status != 'archived'";
         $statement = DB::query($sql);
         $result = oci_execute($statement);
 
@@ -155,6 +189,23 @@ class CourseModel extends Model {
         # return all courses as an array
         // FIXME:
         return DB::fetchAll($statement);
+    }
+
+    public function getCourseBySlug($slug){
+        if(!$slug):
+            return null;
+        endif;
+
+        $sql = "SELECT * FROM " . $this->table . " WHERE slug = :slug";
+        $params = [':slug' => $slug];
+        $statement = DB::query($sql, $params);
+        $result = oci_execute($statement);
+
+        if(!$result):
+            return null;
+        endif;
+
+        return DB::fetch($statement);
     }
 
 }

@@ -7,6 +7,7 @@ CREATE TABLE users (
     email VARCHAR2(255) UNIQUE NOT NULL,
     password VARCHAR2(255) NOT NULL,
     role VARCHAR2(255) DEFAULT 'user' NOT NULL CHECK (role IN ('user', 'instructor', 'admin')),
+    status VARCHAR2(255) DEFAULT 'active' NOT NULL CHECK (status IN ('active', 'deleted')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -20,15 +21,22 @@ CREATE TABLE courses(
     slug VARCHAR2(255) UNIQUE NOT NULL,
     difficulty_level VARCHAR2(255) NOT NULL CHECK (difficulty_level IN ('beginner', 'intermediate', 'advanced')),
     duration NUMBER,
-    status VARCHAR2(255) DEFAULT 'published' CHECK (status IN ('draft', 'published', 'archived')),
+    status VARCHAR2(255) DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),
     enrollment_count NUMBER DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP
 );
 
+
 ALTER TABLE users 
-ADD image VARCHAR2(255);
+ADD status VARCHAR2(255) DEFAULT 'active' NOT NULL CHECK (status IN ('active', 'deleted'));
+
+
+UPDATE courses 
+SET status = 'published' where status = 'archived';
 
 
 SELECT * FROM users;
 SELECT * FROM courses;
+
+COMMIT;

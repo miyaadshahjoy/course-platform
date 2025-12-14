@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 use App\Core\MiddlewareRunner;
+use App\Controllers\ErrorController;
 
 class Router {
     private $routes = []; # Associative array to hold routes
@@ -36,6 +37,8 @@ class Router {
         return $controller->$action();
     }
     */
+
+    /*
     public function dispatch($uri, $method){
 
         $uri = parse_url($uri, PHP_URL_PATH);
@@ -62,4 +65,54 @@ class Router {
             fn($req) => $controller->$controllerMethod());
 
     }
+    */
+
+    public function dispatch($uri, $method){
+        $uri = parse_url($uri, PHP_URL_PATH);
+        $method = strtoupper($method);
+
+        if (!isset($this->routes[$method])) {
+            http_response_code(405);
+            return;
+        }
+
+        foreach ($this->routes[$method] as $route => $handler) {
+
+            // Convert /course/:slug → regex
+            $pattern = preg_replace('#:([\w]+)#', '([^/]+)', $route);
+            $pattern = "#^{$pattern}$#";
+
+            if (preg_match($pattern, $uri, $matches)) {
+                array_shift($matches); // full match out
+
+                [$controllerClass, $controllerMethod] = $handler;
+
+                $request = [
+                    'uri' => $uri,
+                    'method' => $method,
+                    'params' => $matches
+                ];
+
+                $controller = new $controllerClass($request);
+
+                $middlewares = method_exists($controller, 'getMiddlewares')
+                    ? $controller->getMiddlewares($controllerMethod)
+                    : [];
+
+                MiddlewareRunner::run(
+                    $request,
+                    $middlewares,
+                    fn($req) => call_user_func_array(
+                        [$controller, $controllerMethod],
+                        $matches
+                    )
+                );
+
+                return;
+            }
+        }
+
+        (new ErrorController)->show(404); # Not Found();
+    }
+
 }

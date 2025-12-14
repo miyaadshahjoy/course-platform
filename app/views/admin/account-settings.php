@@ -107,12 +107,42 @@
               disabled
             />
           </div>
-        </div>
+          <div class="form-group">
+            <label>Address</label>
+            <input
+              type="text"
+              name="address"
+              value="Not provided"
+              required
+              disabled
+            />
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <input
+              type="text"
+              name="gender"
+              value="Not provided"
+              required
+              disabled
+            />
+          </div>
+          <div class="form-group">
+            <label>Date of Birth</label>
+            <input
+              type="text"
+              name="dob"
+              value="Not provided"
+              required
+              disabled
+            />
+          </div>
 
+        </div>
         <input
           type="submit"
           value="Update Profile"
-          class="button button-submit hide"
+          class="button-submit hide"
           id="update-profile-btn"
         />
 
@@ -122,51 +152,53 @@
       </form>
     </div>
   </div>
-</div>
 
-<div class="password">
-  <h3>Update Password</h3>
+  <div class="password">
+    <h3>Update Password</h3>
 
-  <form action="/user/update-password" method="POST" class="form-password">
-    <div class="form-group">
-      <label>Current Password</label>
-      <input type="password" name="current_password" required />
-    </div>
-
-    <div class="form-group">
-      <label>New Password</label>
-      <input type="password" name="new_password" required />
-    </div>
-
-    <div class="form-group">
-      <label>Confirm New Password</label>
-      <input type="password" name="confirm_password" required />
-    </div>
-
-    <input type="submit" value="Update Password" class="button button-submit" />
-  </form>
-</div>
-
-<!-- MODAL -->
-<div id="updatePictureModal" class="modal-overlay hidden">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h2>Update Picture</h2>
-      <button class="modal-close">&times;</button>
-    </div>
-
-    <form
-      id=""
-      action="/user/update-picture"
-      method="POST"
-      enctype="multipart/form-data"
-    >
+    <form action="/user/update-password" method="POST" class="form-password">
       <div class="form-group">
-        <label class="modal-label">Picture</label>
-        <input type="file" name="image" class="modal-input" />
-
-        <input type="submit" class="button button-submit" value="Submit" />
+        <label>Current Password</label>
+        <input type="password" name="current_password" required />
       </div>
+
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" name="new_password" required />
+      </div>
+
+      <div class="form-group">
+        <label>Confirm New Password</label>
+        <input type="password" name="confirm_password" required />
+      </div>
+
+      <input type="submit" value="Update Password" class="button-submit" />
     </form>
   </div>
+
+  <!-- MODAL -->
+  <div id="updatePictureModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Update Picture</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+
+      <form
+        id=""
+        action="/user/update-picture"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label class="modal-label">Picture</label>
+          <input type="file" name="image" class="modal-input" />
+
+          <input type="submit" class="button-submit" value="Submit" />
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+
+

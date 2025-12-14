@@ -132,6 +132,15 @@ class UserModel extends Model {
         return $result;
 
     }
+
+    public function deleteUser($id) {
+        if(!$id) return false;
+        $sql = "UPDATE " . $this->table . " SET status = 'deleted' WHERE id = :id";
+        $params = [':id' => $id];
+        $statement = DB::query($sql, $params);
+        $result = oci_execute($statement);
+        return $result;
+    }
 }
 
 

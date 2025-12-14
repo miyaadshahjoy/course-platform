@@ -6,8 +6,8 @@ class AuthMiddleware implements MiddlewareInterface
 {
     public function handle($request, $next) {
         if (!isset($_SESSION['user_id'])) :
-            echo "You must be signed in to access this page.";
-            // header("Location: /signin");
+            (new ErrorController())->show(403);
+            header("Location: /signin");
             exit;
         endif;
 

@@ -1,9 +1,8 @@
 <?php
 namespace App\Middlewares;
 use App\Middlewares\MiddlewareInterface;
-use App\Controllers\ErrorController;
 
-class AdminMiddleware implements MiddlewareInterface
+class UserMiddleware implements MiddlewareInterface
 {
     public function handle($request, $next) {
         // If user isn't logged in at all
@@ -12,8 +11,8 @@ class AdminMiddleware implements MiddlewareInterface
             exit;
         endif;
 
-        // If logged in but NOT admin
-        if ($_SESSION['user_role'] !== 'admin'):
+        // If logged in but NOT user
+        if ($_SESSION['user_role'] !== 'user'):
             (new ErrorController())->show(403);
             exit;
         endif;

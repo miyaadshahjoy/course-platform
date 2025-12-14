@@ -2,14 +2,24 @@
 namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\CourseModel;
+use App\Core\Flash;
 
 
 class CourseController extends Controller {
     private $courseObject;
+    protected $request;
+    protected $middlewares = [
+        'index' => [LoggerMiddleware::class],
+    ];
 
-    public function __construct() {
+    public function __construct($request) {
         $this->courseObject = new CourseModel();
+        $this->request = $request;
     }
+    public function getMiddlewares($method) {
+        return $this->middlewares[$method] ?? [];
+    }
+
 
     public function index() {
         
@@ -32,7 +42,8 @@ class CourseController extends Controller {
 
     private function handleThumbnailUpload() {
         if(!isset($_FILES['thumbnail']) || $_FILES['thumbnail']['error'] !== UPLOAD_ERR_OK):
-            echo "Error uploading thumbnail.";
+            Flash::set('error', "Error uploading thumbnail.");
+            header("Location:" . $_SERVER['HTTP_REFERER']);
             exit;
         endif;
         $uploadDir = __DIR__ . '/../../public/uploads/thumbnails/';
@@ -43,7 +54,8 @@ class CourseController extends Controller {
         $uploadFileName = basename($_FILES['thumbnail']['name'], '.' . $ext) . '-' . time() . '-' . rand(1000, 9999) . '.' . $ext;
         $uploadFilePath = $uploadDir . $uploadFileName;
         if(!move_uploaded_file($_FILES['thumbnail']['tmp_name'], $uploadFilePath)):
-            echo "Failed to move uploaded file.";
+            Flash::set('error', "Failed to move uploaded file.");
+            header("Location:" . $_SERVER['HTTP_REFERER']);
             return null;
         endif;
         return $uploadFileName;
@@ -54,7 +66,8 @@ class CourseController extends Controller {
 
             $thumbnailPath = $this->handleThumbnailUpload();
             if(!$thumbnailPath):
-                echo "Thumbnail upload failed.";
+                Flash::set('error', "Error uploading thumbnail.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
             $data = [
@@ -70,11 +83,14 @@ class CourseController extends Controller {
             ];
             $result = $this->courseObject->createCourse($data);
             if (!$result):
-                echo "Error creating course.";
+                Flash::set('error', "Error creating course.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
-            echo "✅ Course created successfully.";
+            Flash::set('success', "Course created successfully.");
+            header("Location: /admin/courses");
+            exit;
 
         }
     }
@@ -82,7 +98,8 @@ class CourseController extends Controller {
     public function edit($id) {
         $course = $this->courseObject->getCourseById($id);
         if(!$course):
-            echo "Course not found.";
+            Flash::set('error', "Course not found.");
+            header("Location:" . $_SERVER['HTTP_REFERER']);
             exit;
         endif;
 
@@ -109,10 +126,13 @@ class CourseController extends Controller {
 
             $result = $this->courseObject->updateCourse($id, $data);
             if(!$result):
-                echo "Error updating course.";
+                Flash::set('error', "Error updating course.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
-            echo "✅ Course updated successfully.";
+            Flash::set('success', "Course updated successfully.");
+            header("Location: /admin/courses");
+            exit;
 
         endif;
 
@@ -120,15 +140,19 @@ class CourseController extends Controller {
 
     public function delete($id) {
         if(!$id):
-            echo "Invalid course ID.";
+            Flash::set('error', "Error deleting course.");
+            header("Location:" . $_SERVER['HTTP_REFERER']);
             exit;
         endif;
         $result = $this->courseObject->deleteCourse($id);
         if(!$result):
-            echo "Error deleting course.";
+            Flash::set('error', "Error deleting course.");
+            header("Location:" . $_SERVER['HTTP_REFERER']);
             exit;
         endif;
-        echo "✅ Course deleted successfully.";
+        Flash::set('success', "Course deleted successfully.");
+        header("Location: /admin/courses");
+        exit;
     }
 
     // TODO: preg_replace()
@@ -136,5 +160,17 @@ class CourseController extends Controller {
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title), '-'));
         return $slug;
 
+    }
+
+    public function show($slug){
+
+
+        $course = $this->courseObject->getCourseBySlug($slug);
+        if(!$course):
+            Flash::set('error', "Course not found.");
+            header("Location:" . $_SERVER['HTTP_REFERER']);
+            exit;
+        endif;
+        $this->view('course/view', ['course' => $course]);
     }
 }

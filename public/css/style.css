@@ -2,8 +2,11 @@
 @import "admin-dashboard.css";
 @import "courses.css";
 @import "create-course.css";
+@import "edit-course.css";
 @import "users.css";
 @import "account-settings.css";
 @import "user-dashboard.css";
 @import "admin-navbar.css";
 @import "header.css";
+@import "signup.css";
+@import "signin.css";

@@ -10,8 +10,8 @@
 
     <!-- Header -->
     <?php require_once __DIR__ . '/../partials/header.php'; ?>
-    <div class="container">
-      <div class="profile">
+    <div class="profile">
+      <div class="container">
         <h3>Profile Information</h3>
         <div class="profile-wrapper">
           <div class="profile-image">
@@ -120,12 +120,43 @@
                     disabled
                   />
                 </div>
+                <div class="form-group">
+                  <label>Address</label>
+                  <input
+                    type="text"
+                    name="address"
+                    value="Not provided"
+                    required
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Gender</label>
+                  <input
+                    type="text"
+                    name="gender"
+                    value="Not provided"
+                    required
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Date of Birth</label>
+                  <input
+                    type="text"
+                    name="dob"
+                    value="Not provided"
+                    required
+                    disabled
+                  />
+                </div>
+
               </div>
 
               <input
                 type="submit"
                 value="Update Profile"
-                class="button button-submit hide"
+                class="button-submit hide"
                 id="update-profile-btn"
               />
 
@@ -161,7 +192,7 @@
           <input
             type="submit"
             value="Update Password"
-            class="button button-submit"
+            class="button-submit"
           />
         </form>
       </div>
@@ -179,7 +210,7 @@
               <label class="modal-label">Picture</label>
               <input type="file" name="image" class="modal-input" />
 
-              <input type="submit" class="button button-submit" value="Submit">
+              <input type="submit" class="button-submit" value="Submit">
             </div>
           </form>
         </div>

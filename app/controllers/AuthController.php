@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Core\DB;
 use App\Core\Controller;
 use App\Models\UserModel;
+use App\Core\Flash;
 
 class AuthController extends Controller {
     public function signinPage(){
@@ -30,16 +31,19 @@ class AuthController extends Controller {
 
         # Validate email
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)):
-            echo "Invalid email format.";
+            Flash::set('error', "Invalid email format.");
+            header("Location: /signup");
             return;
         endif;
 
         if(empty($fullname) || empty($username) || empty($email) || empty($password) || empty($password_confirm)):
-            echo "All fields are required.";
+            Flash::set('error', "All fields are required.");
+            header("Location: /signup");
             return;
         endif;
         if($password !== $password_confirm):
-            echo "Passwords do not match.";
+            Flash::set('error', "Passwords do not match.");
+            header("Location: /signup");
             return;
         endif;
 
@@ -57,11 +61,14 @@ class AuthController extends Controller {
 
         if(!$result):
             
-            echo "Error creating user.";
+            Flash::set('error', "Error creating user.");
+            header("Location: /signup");
             return;
         endif;
 
-        echo "✅ User created successfully!";
+        Flash::set('success', "Signup successfull!");
+        header("Location: /signin");
+        exit;
 
     }
 
@@ -73,20 +80,23 @@ class AuthController extends Controller {
         $password = $_POST['password'];
 
         if(empty($email) || empty($password)):
-            echo "Email and password are required.";
+            Flash::set('error', "Email and password are required.");
+            header("Location: /signin");
             return;
         endif;
-
-
+        
+        
         $user_object = new UserModel();
         $user = $user_object->findByEmail($email);
         if(!$user):
-            echo "The user with this email does not exist. <br>";
+            Flash::set('error', "The user with this email does not exist.");
+            header("Location: /signin");
             return;
         endif;
-
+        
         if(!password_verify($password, $user['PASSWORD'])):
-            echo "Incorrect password. <br>";
+            Flash::set('error', "Incorrect password.");
+            header("Location: /signin");
             return;
         endif;
         
@@ -98,11 +108,13 @@ class AuthController extends Controller {
         $_SESSION['user_role'] = $user['ROLE'];
 
         if ($user['ROLE'] === 'admin'):
+            Flash::set('success', "Signin successful!");
             header("Location: /admin");
             exit;
         endif;
+        Flash::set('success', "Signin successful!");
 
-        header("Location: /users");
+        header("Location: /");
         exit;
 
     }
@@ -116,15 +128,14 @@ class AuthController extends Controller {
         unset($_SESSION['user_image']);
         unset($_SESSION['user_role']);
 
-        session_destroy();
-
-        echo "✅ Signout successful!";
+        
+        Flash::set('success', "Successfully logged out!");
+        // session_destroy();
         header("Location: /signin");
+        exit;
     
     }
 
 }
-
-
 
 ?>

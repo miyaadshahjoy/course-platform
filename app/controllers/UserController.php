@@ -5,14 +5,19 @@ use App\Core\Controller;
 use App\Models\UserModel;
 use App\Middlewares\LoggerMiddleware;
 use App\Middlewares\AuthMiddleware;
+use App\Middlewares\UserMiddleware;
+use App\Core\Flash;
 
 class UserController extends Controller {
 
     private $userObject;
     protected $request;
     protected $middlewares = [
-        'index' => [LoggerMiddleware::class, AuthMiddleware::class],
-        'dashboard' => [LoggerMiddleware::class ,AuthMiddleware::class]
+        'index' => [LoggerMiddleware::class, AuthMiddleware::class, UserMiddleware::class],
+        'dashboard' => [LoggerMiddleware::class ,AuthMiddleware::class, UserMiddleware::class],
+        'updatePicture' => [LoggerMiddleware::class ,AuthMiddleware::class],
+        'updateProfile' => [LoggerMiddleware::class ,AuthMiddleware::class],
+        'updatePassword' => [LoggerMiddleware::class ,AuthMiddleware::class],
     ];
 
     public function __construct($request) {
@@ -40,14 +45,16 @@ class UserController extends Controller {
             $imagePath = $this->handleImageUpload(); 
 
             if (!$imagePath):
-                echo "No image were uploaded.";
+                Flash::set('error', "Error uploading image.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
             $user = $this->userObject->findById($_SESSION['user_id']);
 
             if (!$user):
-                echo "User not found.";
+                Flash::set('error', "User not found.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
@@ -63,11 +70,12 @@ class UserController extends Controller {
             $result = $this->userObject->updateUser($user['ID'], $data);
 
             if (!$result):
-                echo "Error updating user picture.";
+                Flash::set('error', "Error updating user picture.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
-            echo "✅ Picture updated successfully.";
+            Flash::set('success', "Profile picture updated successfully.");
             header("Location:" . $_SERVER['HTTP_REFERER']);
             
         endif;
@@ -82,14 +90,16 @@ class UserController extends Controller {
             $email = $_POST['email'];
             
             if(empty($fullname) || empty($username) || empty($email)):
-                echo "All fields are required.";
+                Flash::set('error', "All fields are required.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
             $user = $this->userObject->findById($_SESSION['user_id']);
 
             if (!$user):
-                echo "User not found.";
+                Flash::set('error', "User not found.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
@@ -106,11 +116,12 @@ class UserController extends Controller {
             $result = $this->userObject->updateUser($user['ID'], $data);
 
             if (!$result):
-                echo "Error updating user profile.";
+                Flash::set('error', "Error updating user profile.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
-            echo "✅ Profile updated successfully.";
+            Flash::set('success', "Profile updated successfully.");
             header("Location:" . $_SERVER['HTTP_REFERER']);
             
         endif;
@@ -131,24 +142,28 @@ class UserController extends Controller {
             $confirm_password = $_POST['confirm_password'];
 
             if(empty($current_password) || empty($new_password) || empty($confirm_password)):
-                echo "All fields are required.";
+                Flash::set('error', "All fields are required.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
             $user = $this->userObject->findById($_SESSION['user_id']);
 
             if (!$user):
-                echo "User not found.";
+                Flash::set('error', "User not found.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
             if(!password_verify($current_password, $user['PASSWORD'])):
-                echo "Incorrect current password.";
+                Flash::set('error', "Current password is incorrect.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
             if($new_password !== $confirm_password):
-                echo "New password and confirm password do not match.";
+                Flash::set('error', "New password and confirm password do not match.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
@@ -167,11 +182,12 @@ class UserController extends Controller {
             $result = $this->userObject->updateUser($user['ID'], $data);
 
             if (!$result):
-                echo "Error updating password.";
+                Flash::set('error', "Error updating user password.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 exit;
             endif;
 
-            echo "✅ Password updated successfully.";
+            Flash::set('success', "Password updated successfully.");
             header("Location:" . $_SERVER['HTTP_REFERER']);
             
         endif;
@@ -181,7 +197,8 @@ class UserController extends Controller {
 
     private function handleImageUpload() {
         if(!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK):
-            echo "Error uploading image.";
+            Flash::set('error', "Failed to upload image.");
+            header("Location:" . $_SERVER['HTTP_REFERER']);
             exit;
         endif;
         $uploadDir = __DIR__ . '/../../public/uploads/users/';
@@ -192,7 +209,9 @@ class UserController extends Controller {
         $uploadFileName = 'user' . '-' . time() . '-' . rand(1000, 9999) . '.' . $ext;
         $uploadFilePath = $uploadDir . $uploadFileName;
         if(!move_uploaded_file($_FILES['image']['tmp_name'], $uploadFilePath)):
-            echo "Failed to move uploaded file.";
+            Flash::set('error', "Failed to move uploaded file.");
+            header("Location:" . $_SERVER['HTTP_REFERER']);
+            exit;
             return null;
         endif;
         return $uploadFileName;

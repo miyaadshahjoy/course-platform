@@ -54,21 +54,22 @@
           <td ><?= DateTime::createFromFormat('d-M-y h.i.s.u A', $course['CREATED_AT'])->format('F d, Y') ?></td>
 
           <td class="actions">
-            <a href="/course/<?= $course['SLUG'] ?>" class="button button-blue">View</a>
+            <a href="/admin/courses/<?= $course['SLUG'] ?>" class="button button-blue">View</a>
 
             <a
               href="/admin/courses/edit/<?= $course['ID'] ?>" class="button button-yellow" >Edit</a
             >
 
             <?php if($course['STATUS'] === 'draft'): ?>
-            <a
+              <a
               href="/admin/courses/publish/<?= $course['ID'] ?>" class="button button-green"
               >Publish</a
-            >
-            <?php else: ?>
+              >
+            <?php endif; ?>
+            <?php if($course['STATUS'] === 'published'): ?>
             <a
-              href="/admin/courses/unpublish/<?= $course['ID'] ?>" class="button button-orange"
-              >Unpublish</a
+              href="/admin/courses/draft/<?= $course['ID'] ?>" class="button button-orange"
+              >Draft</a
             >
             <?php endif; ?>
 
@@ -77,11 +78,11 @@
               >Archive</a
             >
 
-            <a
+            <!-- <a
               href="/admin/courses/delete/<?= $course['ID'] ?>" class="button button-red"
               onclick="return confirm('Delete this course?')"
               >Delete</a
-            >
+            > -->
           </td>
         </tr>
         <?php endforeach; ?>
