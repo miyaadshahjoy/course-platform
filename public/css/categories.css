@@ -1,0 +1,41 @@
+.categories {
+  padding-top: 24px;
+}
+
+.form-categories {
+  display: flex;
+  flex-direction: row;
+  /* visibility: visible; */
+  margin-bottom: 24px;
+}
+.button-add,
+.button-add:visited,
+.button-add:active,
+.button-add:focus {
+  display: flex;
+  justify-self: end;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid var(--color-border);
+  margin-bottom: 24px;
+}
+
+.form-categories .button-cancel,
+.form-categories .button-cancel:visited,
+.form-categories .button-cancel:active,
+.form-categories .button-cancel:focus {
+  display: flex;
+  padding: 8px 12px;
+}
+
+.categories-list {
+  list-style: none;
+}
+
+.categories-list li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}

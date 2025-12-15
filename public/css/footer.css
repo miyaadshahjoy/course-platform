@@ -1,0 +1,190 @@
+.footer {
+  background: radial-gradient(circle at top, #1f2235, #141626);
+  color: #ffffff;
+  padding: 60px 24px 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 60px;
+}
+
+.footer-logo img {
+  display: inline-block;
+  width: 120px;
+}
+
+.footer-brand .tagline {
+  margin-top: 16px;
+  color: #868e96;
+  max-width: 320px;
+  font-size: 16px;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.footer-column h4 {
+  font-size: 16px;
+  margin-bottom: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  margin-bottom: 12px;
+  color: #cbd5f5;
+}
+
+.footer-column a {
+  color: #cbd5f5;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+  color: #ffffff;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.socials {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: right;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-links {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand {
+    text-align: center;
+  }
+
+  .footer-brand .tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ///////////////////////////////////////////////// */
+
+.telegram-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #229ed9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  cursor: pointer;
+  animation: telegram-pulse 2s infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.telegram-float:hover {
+  animation: none; /* stop pulse on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Telegram icon */
+.telegram-float svg {
+  width: 26px;
+  height: 26px;
+  fill: #fff;
+}
+
+/* Pulse animation */
+@keyframes telegram-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 158, 217, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(34, 158, 217, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 158, 217, 0);
+  }
+}
+
+/* Tooltip */
+.telegram-tooltip {
+  position: absolute;
+  right: 70px;
+  background: #212529;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Tooltip arrow */
+.telegram-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  transform: translateY(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #212529;
+}
+
+/* Show tooltip on hover */
+.telegram-float:hover .telegram-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}

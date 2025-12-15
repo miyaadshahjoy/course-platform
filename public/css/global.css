@@ -2,11 +2,15 @@
 
 :root {
   --font-primary: "Inter", sans-serif;
-  --color-primary: #0f766e;
-  --color-border: #99d5cf;
-  --color-border-light: #ccebe7;
-  --color-background: #f0fdfa;
-  --color-background-light: #ccfbf1;
+  --color-primary: #e0b122;
+  /* Borders */
+  --color-border: #c89d1e;
+  --color-border-light: #edd28a;
+
+  /* Backgrounds */
+  --color-background: #fffaf0;
+  --color-background-light: #fffdf7;
+
   --color-font: #495057;
   --color-font-dark: #343a40;
 }
@@ -27,6 +31,7 @@ html {
 body {
   font-family: var(--font-primary);
   font-size: 1rem;
+  color: var(--color-font);
 }
 
 h1,
@@ -35,6 +40,7 @@ h3,
 h4,
 h5,
 h6 {
+  color: var(--color-font-dark);
   font-weight: 600;
   line-height: 1.1;
 }
@@ -60,6 +66,12 @@ section {
 }
 .container {
   max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container-main {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -385,4 +397,7 @@ select {
 /* Display none */
 .hide {
   display: none;
+}
+.not-visible {
+  visibility: hidden;
 }

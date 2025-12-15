@@ -1,0 +1,315 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 420px;
+  max-height: 900px;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    height: 70vh;
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 40vh;
+    min-height: 260px;
+  }
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.dots {
+  position: absolute;
+  bottom: 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+/* About us section */
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 48px;
+}
+
+.about-image {
+  flex: 1 1 300px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.about-text {
+  flex: 2 1 500px;
+}
+
+.subtitle {
+  display: inline-block;
+  color: var(--color-primary);
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  border-bottom: 2px dotted var(--color-primary);
+}
+
+.about-text h2 {
+  margin-bottom: 24px;
+}
+
+.about-text p {
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    /* text-align: center; */
+  }
+
+  /* .about-text h2 {
+    font-size: 1.7rem;
+  } */
+}
+
+/* Course section  */
+.courses {
+  text-align: center;
+}
+
+.courses h2 {
+  margin-bottom: 12px;
+}
+
+.courses p {
+  margin-bottom: 24px;
+}
+
+.courses-container {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+}
+
+.course-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 24px;
+}
+
+.course-content {
+  padding-left: 24px;
+  padding-right: 24px;
+  flex: 1;
+}
+
+.course-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.course-price {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.course-rating {
+  color: var(--color-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.course-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.course-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 1024px) {
+  .course-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 650px) {
+  .course-card {
+    width: 100%;
+  }
+}
+
+/* Testimonial */
+.testimonial {
+  text-align: center;
+}
+
+.testimonial-header h2 {
+  margin-bottom: 16px;
+}
+
+.testimonial-header p {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.testimonial-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.testimonial-avatar img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+}
+
+.testimonial-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.testimonial-role {
+  font-size: 0.8rem;
+  color: #868e96;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 1rem 0;
+}
+
+.testimonial-text {
+  position: relative;
+  font-size: 0.9rem;
+  line-height: 1.7;
+
+  padding: 0 1.25rem;
+  flex-grow: 1;
+}
+
+.testimonial-text::before,
+.testimonial-text::after {
+  position: absolute;
+  color: var(--color-primary);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.testimonial-text::before {
+  content: "“";
+  left: 0;
+  top: -0.5rem;
+}
+.testimonial-text::after {
+  content: "”";
+  right: 0;
+  bottom: -1rem;
+}
+
+.stars {
+  margin-top: 1.5rem;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-header h2 {
+    font-size: 1.6rem;
+  }
+}

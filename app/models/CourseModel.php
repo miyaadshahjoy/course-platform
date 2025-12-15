@@ -5,6 +5,7 @@ use App\Core\DB;
 
 class CourseModel extends Model {
     protected $table = 'courses';
+    protected $categoriesTable = 'course_categories';
 
     public function __construct() {
         parent :: __construct();
@@ -31,7 +32,7 @@ class CourseModel extends Model {
     }
 
     public function getAllCourses(){
-        $sql = "SELECT * FROM " . $this->table . " WHERE status != 'archived'";
+        $sql = "SELECT c.*, cc.category_name as category FROM " . $this->table . " c JOIN " . $this->categoriesTable . " cc ON c.category = cc.id WHERE status != 'archived'";
         $statement = DB::query($sql);
         $result = oci_execute($statement);
 
@@ -48,7 +49,7 @@ class CourseModel extends Model {
             return null;
         endif;
 
-        $sql = "SELECT * FROM " . $this->table . " WHERE id = :id";
+        $sql = "SELECT c.*, cc.category_name as category FROM " . $this->table . " c JOIN " . $this->categoriesTable . " cc ON c.category = cc.id WHERE c.id = :id AND status != 'archived'";
         $params = [':id' => $id];
         $statement = DB::query($sql, $params);
         $result = oci_execute($statement);
@@ -196,7 +197,7 @@ class CourseModel extends Model {
             return null;
         endif;
 
-        $sql = "SELECT * FROM " . $this->table . " WHERE slug = :slug";
+         $sql = "SELECT c.*, cc.category_name as category FROM " . $this->table . " c JOIN " . $this->categoriesTable . " cc ON c.category = cc.id WHERE c.slug = :slug AND status != 'archived'";
         $params = [':slug' => $slug];
         $statement = DB::query($sql, $params);
         $result = oci_execute($statement);

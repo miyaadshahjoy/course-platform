@@ -7,6 +7,7 @@
     <a href="/admin/courses">Courses</a>
     <a href="/admin/courses/create">Create Course</a>
     <a href="/admin/users">Users</a>
+    <a href="/admin/categories">Categories</a>
     <a href="/admin/reviews">Reviews</a>
     <a href="/admin/account-settings">Account Settings</a>
     <a href="/logout">Logout</a>

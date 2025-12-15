@@ -35,12 +35,14 @@
 
     <div class="form-group">
       <label>Category</label>
-      <select name="category" required>
+      <select
+        name="category"
+        required
+      >
         <option value="">Select category</option>
-        <option value="Programming" <?= $course['CATEGORY'] === 'Programming' ? 'selected' : '' ?>>Programming</option>
-        <option value="Design" <?= $course['CATEGORY'] === 'Design' ? 'selected' : '' ?>>Design</option>
-        <option value="Marketing" <?= $course['CATEGORY'] === 'Marketing' ? 'selected' : '' ?>>Marketing</option>
-        <option value="Business" <?= $course['CATEGORY'] === 'Business' ? 'selected' : '' ?>>Business</option>
+        <?php foreach ($categories as $category):?>
+          <option value="<?= $category['ID'] ?>"><?= $category['CATEGORY_NAME'] ?></option>
+        <?php endforeach; ?>
       </select>
     </div>
 

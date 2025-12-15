@@ -16,14 +16,17 @@ $routes = [
         '/admin/courses/draft/:id' => ['App\Controllers\AdminDashboardController', 'draftCourse'], # [GET] /admin/courses/draft/:id
         '/admin/courses/archive/:id' => ['App\Controllers\AdminDashboardController', 'archiveCourse'], # [GET] /admin/courses/archive/:id
         '/admin/users' => ['App\Controllers\AdminDashboardController', 'users'], # [GET] /admin/users
+        '/admin/categories' => ['App\Controllers\AdminDashboardController', 'categories'], # [GET] /admin/categories
         '/admin/users/view/:id' => ['App\Controllers\AdminDashboardController', 'viewUser'], # [GET] /admin/users/view
         '/admin/users/delete/:id' => ['App\Controllers\AdminDashboardController', 'deleteUser'], # [GET] /admin/users/delete
         '/admin/account-settings' => ['App\Controllers\AdminDashboardController', 'settings'], # [GET] /admin/account-settings
 
         '/users' => ['App\Controllers\UserController', 'index'], # [GET] /users
         '/users/dashboard' => ['App\Controllers\UserController', 'dashboard'], # [GET] /users/dashboard
-
-
+        
+        
+        '/courses' => ['App\Controllers\HomeController', 'courses'], # [GET] /courses
+        '/about' => ['App\Controllers\HomeController', 'about'], # [GET] /about
 
 
 
@@ -34,6 +37,7 @@ $routes = [
         '/signin' => ['App\Controllers\AuthController', 'signin'], # [POST] /signin
         '/admin/courses/store' => ['App\Controllers\AdminDashboardController', 'store'], # [POST] /admin/courses/store
         '/admin/courses/update' => ['App\Controllers\AdminDashboardController', 'updateCourse'], # [POST] /admin/courses/update
+        '/admin/categories/create' => ['App\Controllers\AdminDashboardController', 'createCategory'], # [POST] /admin/categories/create
 
         '/user/update-picture' => ['App\Controllers\UserController', 'updatePicture'],
         '/user/update-profile' => ['App\Controllers\UserController', 'updateProfile'],

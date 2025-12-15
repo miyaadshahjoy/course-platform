@@ -44,10 +44,9 @@
         required
       >
         <option value="">Select category</option>
-        <option value="Programming">Programming</option>
-        <option value="Design">Design</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Business">Business</option>
+        <?php foreach ($categories as $category):?>
+          <option value="<?= $category['ID'] ?>"><?= $category['CATEGORY_NAME'] ?></option>
+        <?php endforeach; ?>
       </select>
     </div>
 

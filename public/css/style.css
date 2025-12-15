@@ -1,4 +1,6 @@
 @import "global.css";
+@import "home.css";
+@import "about.css";
 @import "admin-dashboard.css";
 @import "courses.css";
 @import "create-course.css";
@@ -10,3 +12,6 @@
 @import "header.css";
 @import "signup.css";
 @import "signin.css";
+@import "categories.css";
+@import "media-queries.css";
+@import "footer.css";

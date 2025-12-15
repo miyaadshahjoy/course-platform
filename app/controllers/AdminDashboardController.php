@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\CourseModel; 
 use App\Models\UserModel;
+use App\Models\CategoryModel;
 use App\Middlewares\LoggerMiddleware;
 use App\Middlewares\AuthMiddleware;
 use App\Middlewares\AdminMiddleware;
@@ -15,6 +16,7 @@ use App\Core\Flash;
 class AdminDashboardController extends Controller {
     private $courseObject;
     private $userObject;
+    private $categoryObject;
     protected $request;
     protected $middlewares = [
         'index' => [LoggerMiddleware::class, AuthMiddleware::class, AdminMiddleware::class],
@@ -31,11 +33,16 @@ class AdminDashboardController extends Controller {
         'viewUser' => [LoggerMiddleware::class, AuthMiddleware::class, AdminMiddleware::class],
         'deleteUser' => [LoggerMiddleware::class, AuthMiddleware::class, AdminMiddleware::class],
         'settings' => [LoggerMiddleware::class, AuthMiddleware::class, AdminMiddleware::class],
+
+        'categories' => [LoggerMiddleware::class, AuthMiddleware::class, AdminMiddleware::class],
+        'createCategory' => [LoggerMiddleware::class, AuthMiddleware::class, AdminMiddleware::class],
+
     ];
 
     public function __construct($request) {
         $this->courseObject = new CourseModel();
         $this->userObject = new UserModel();
+        $this->categoryObject = new CategoryModel();
         $this->request = $request;
     }
     public function getMiddlewares($method) {
@@ -65,7 +72,8 @@ class AdminDashboardController extends Controller {
     }
 
     public function createCourse() {
-        $this->adminView('create-course', []);
+        $categories = $this->categoryObject->getAllCategories();
+        $this->adminView('create-course', ['categories' => $categories]);
     }
 
     public function viewCourse($slug){
@@ -139,13 +147,18 @@ class AdminDashboardController extends Controller {
     public function editCourse($id) {
 
         $course = $this->courseObject->getCourseById($id);
+        $categories = $this->categoryObject->getAllCategories();
+
         if(!$course):
             Flash::set('error', "Course not found.");
             header("Location:" . $_SERVER['HTTP_REFERER']);
             exit;
         endif;
 
-        $this->adminView('edit-course', ['course' => $course]);
+        $this->adminView('edit-course', [
+            'course' => $course,
+            'categories' => $categories
+        ]);
 
     }
 
@@ -308,6 +321,38 @@ class AdminDashboardController extends Controller {
     public function settings() {
         $user = $this->userObject->findByUsername('adminuser');
         $this->adminView('account-settings', ['user' => $user]);
+    }
+
+    public function categories(){
+        $categories = $this->categoryObject->getAllCategories();
+        $this->adminView('categories', ['categories' => $categories]);
+
+    }
+
+    public function createCategory(){
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'):
+
+            $category = $_POST['category_name'];
+            if(empty($category)):
+                Flash::set('error', "No category provided.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
+                exit;
+            endif;
+            $data = [
+                'category_name' => $category
+            ];
+            $result = $this->categoryObject->createCategory($data);
+            if(!$result):
+                Flash::set('error', "Error creating category.");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
+                exit;
+            endif;
+            Flash::set('success', "Category created successfully.");
+            header("Location: /admin/categories");
+            exit;
+        endif;
+
     }
 }
 

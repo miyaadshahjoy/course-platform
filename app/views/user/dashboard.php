@@ -1,6 +1,6 @@
 <section class="courses">
   <div class="course-card">
-    <img src="/uploads/thumbnails/wallpaperflare.com_wallpaper-1765304863-1385.jpg" class="course-image" />
+    <img src="/uploads/thumbnails/undraw_learning-sketchingsh-1765649695-5207.svg" class="course-image" />
 
     <div class="course-body">
       <h2 class="course-title">Mastering Digital Marketing in 2025</h2>

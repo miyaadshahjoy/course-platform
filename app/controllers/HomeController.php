@@ -9,6 +9,15 @@ class HomeController extends Controller {
         # 'home' - the view file name
         return $this->view('home'); # Renders views/home.php
     }
+    public function courses() {
+        # 'home' - the view file name
+        return $this->view('courses'); # Renders views/home.php
+    }
+
+    public function about() {
+        # 'home' - the view file name
+        return $this->view('about'); # Renders views/home.php
+    }
 
     # Test DB connection
     public function testDB() {
