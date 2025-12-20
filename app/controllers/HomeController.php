@@ -14,6 +14,10 @@ class HomeController extends Controller {
         return $this->view('courses'); # Renders views/home.php
     }
 
+    public function viewCourse($slug) {
+        # 'home' - the view file name
+        return $this->view('course-details', ['slug' => $slug]); # Renders views/home.php
+    }
     public function about() {
         # 'home' - the view file name
         return $this->view('about'); # Renders views/home.php

@@ -26,6 +26,9 @@ $routes = [
         
         
         '/courses' => ['App\Controllers\HomeController', 'courses'], # [GET] /courses
+        '/courses/:slug' => ['App\Controllers\HomeController', 'viewCourse'], # [GET] /courses/:slug -> viewCourse
+
+        
         '/about' => ['App\Controllers\HomeController', 'about'], # [GET] /about
 
 

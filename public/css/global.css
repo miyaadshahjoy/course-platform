@@ -19,6 +19,11 @@ html {
   font-size: 100%;
   box-sizing: border-box;
 }
+@media (max-width: 600px) {
+  html {
+    font-size: 70%;
+  }
+}
 
 *,
 *::before,
@@ -63,6 +68,10 @@ img {
 
 section {
   margin-bottom: 96px;
+}
+p {
+  line-height: 1.7;
+  margin-bottom: 24px;
 }
 .container {
   max-width: 1440px;

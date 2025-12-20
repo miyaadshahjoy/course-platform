@@ -10,11 +10,11 @@ const cancelCategoryBtn = document.querySelector("#cancel-category");
 const mobileMenuBtn = document.querySelector(".mobile-menu");
 const mobileMenu = document.querySelector(".mobile-links");
 ///////////////////////////////////////////////////////////////
-const slides = document.getElementById("slides");
-const dots = document.getElementById("dots");
+// const slides = document.getElementById("slides");
+// const dots = document.getElementById("dots");
 
-const total = slides && slides.children.length;
-let index = 0;
+// const total = slides && slides.children.length;
+// let index = 0;
 
 function editProfile() {
   document
@@ -88,33 +88,69 @@ cancelCategoryBtn?.addEventListener("click", (e) => {
 });
 
 ////////////////////////////////////////////////
-function createDots() {
-  for (let i = 0; i < total; i++) {
-    const d = document.createElement("div");
-    d.className = "dot" + (i === 0 ? " active" : "");
-    d.onclick = () => goTo(i);
-    dots.appendChild(d);
-  }
-}
+// Hero Slider
 
-function update() {
-  slides.style.transform = `translateX(-${index * 100}%)`;
-  [...dots.children].forEach((d, i) =>
-    d.classList.toggle("active", i === index)
-  );
-}
+// function createDots() {
+//   for (let i = 0; i < total; i++) {
+//     const d = document.createElement("div");
+//     d.className = "dot" + (i === 0 ? " active" : "");
+//     d.onclick = () => goTo(i);
+//     dots.appendChild(d);
+//   }
+// }
 
-function goTo(i) {
-  index = i;
-  update();
-}
+// function update() {
+//   slides.style.transform = `translateX(-${index * 100}%)`;
+//   [...dots.children].forEach((d, i) =>
+//     d.classList.toggle("active", i === index)
+//   );
+// }
 
-function autoPlay() {
-  index = (index + 1) % total;
-  update();
-}
+// function goTo(i) {
+//   index = i;
+//   update();
+// }
 
-createDots();
-setInterval(autoPlay, 5000);
+// function autoPlay() {
+//   index = (index + 1) % total;
+//   update();
+// }
+
+// createDots();
+// setInterval(autoPlay, 5000);
 
 ////////////////////////////////////////////////////////////////////////
+
+// Course share
+document.getElementById("shareBtn").addEventListener("click", () => {
+  navigator.clipboard
+    .writeText(window.location.href)
+    .then(() => alert("Course link copied to clipboard!"))
+    .catch(() => alert("Failed to copy link"));
+});
+
+// Video modal
+const videos = document.querySelectorAll(".video");
+const videoModal = document.getElementById("videoModal");
+const modalVideo = document.getElementById("modalVideo");
+const videoModalClose = document.querySelector(".close-btn");
+
+videos.forEach((video) => {
+  video.addEventListener("click", () => {
+    const src = video.dataset.video;
+    modalVideo.src = src;
+    videoModal.classList.add("active");
+    modalVideo.play();
+  });
+});
+
+videoModalClose.addEventListener("click", closeModal);
+videoModal.addEventListener("click", (e) => {
+  if (e.target === videoModal) closeModal();
+});
+
+function closeModal() {
+  videoModal.classList.remove("active");
+  modalVideo.pause();
+  modalVideo.src = "";
+}

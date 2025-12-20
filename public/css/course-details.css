@@ -1,0 +1,181 @@
+/* HERO SECTION */
+/* .course-hero {
+  
+} */
+.course-hero {
+  padding-top: 48px;
+}
+
+.hero-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 36px;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.video-preview {
+  background: #000;
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.hero-info h1 {
+  margin-bottom: 16px;
+}
+
+.value-prop {
+  margin-bottom: 24px;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.stat {
+  background: #f3f4f6;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+.course-price {
+  margin-bottom: 16px;
+}
+#price {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* MAIN CONTENT */
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.content {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 48px;
+}
+
+.content h2 {
+  font-size: 22px;
+  margin-bottom: 24px;
+}
+
+.content ul {
+  padding-left: 20px;
+}
+
+.content li {
+  margin-bottom: 8px;
+}
+
+/* Course curriculum */
+.course-curriculum {
+  border-radius: 12px;
+}
+
+.course-curriculum h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.curriculum-item {
+  background: var(--color-background-light);
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.curriculum-header {
+  background: var(--color-background);
+  padding: 16px 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.curriculum-list {
+  list-style: none;
+  padding: 20px 24px;
+}
+
+.curriculum-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.curriculum-list li:last-child {
+  border-bottom: none;
+}
+
+.course-outcomes ul {
+  list-style: none;
+  padding-left: 20px;
+}
+
+/*  STICKY CARD */
+.enroll-card {
+  position: sticky;
+  top: 100px;
+  background: var(--color-background);
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.enroll-card .price {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 36px;
+}
+
+.enroll-card button {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/*  RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-wrapper,
+  .content-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-info .button {
+    width: 100%;
+  }
+  .enroll-card {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 16px 16px 0 0;
+    border: none;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+  }
+
+  .enroll-card .price {
+    margin-bottom: 16px;
+  }
+  .enroll-card button {
+    margin-bottom: 12px;
+  }
+
+  /* Prevent content from hiding behind the card */
+  .course-details {
+    padding-bottom: 180px;
+  }
+}
